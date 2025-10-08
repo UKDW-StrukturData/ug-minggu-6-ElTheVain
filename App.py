@@ -48,17 +48,34 @@ if (choice in ("Insert","Edit")):
                     else: st.error("insert fail")
                                 
 # TODO: buatkan sistem filter data tabel berdasarkan kolom yang memiliki data angka
+filter = ""
+targetFilterColumn = ""
 option = ["None",">","<","=","<=",">="]
 filterSelectBox = st.selectbox("Opsi Filter: ",option)
 
 if (filterSelectBox == "None"):
     st.table(em.getDataFrame()) # tabel biasa
+
 else:
     targetFilterColumn = st.selectbox("Target Column",["NIM","Nilai"]) # pilihan kolom
+    
     filter = st.text_input("Filter Nilai") # input angka filter
+
 
 if (filter != ""):
     if (filterSelectBox == ">"):
-        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] > int(filter)]) # cara filter
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] > int(filter)]) 
     # TODO: lanjutkan code di atas
-    # note: cara filter ada di modul
+    elif (filterSelectBox == "<"):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] < int(filter)]) 
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] == int(filter)]) 
+    elif (filterSelectBox == "<="):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] <= int(filter)])
+    elif (filterSelectBox == ">="):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] >= int(filter)]) 
+    elif (filterSelectBox == "="):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] == int(filter)])
+
+
+
+    
